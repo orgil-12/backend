@@ -1,14 +1,17 @@
 const express = require("express");
 const { error } = require("node:console");
 const fs = require("node:fs");
+var cors = require('cors')
 const app = express();
-const port = 3000;
+const port = 4000;
 
 app.use(express.json());
+app.use(cors());
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+
+// app.get("/", (req, res) => {
+//   res.send("Hello World!");
+// });
 
 app.get("/movies", (req, res) => {
   const data = fs.readFileSync("data/movies.json", "utf8");
@@ -18,7 +21,6 @@ app.get("/movies", (req, res) => {
 
 app.post("/movies", (req, res) => {
   const { body } = req;
-  console.log(body)
   const data = fs.readFileSync("data/movies.json", "utf8");
   const movies = JSON.parse(data);
 
